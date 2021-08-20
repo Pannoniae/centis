@@ -7,7 +7,7 @@ android {
     buildToolsVersion '31.0.0'
 
     defaultConfig {
-        applicationId "com.example.happybirthday"
+        applicationId 'com.pristech.centis'
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1

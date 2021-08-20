@@ -1,4 +1,4 @@
-package com.example.happybirthday
+package com.pristech.centis
 
 import android.graphics.Canvas
 import android.graphics.Paint

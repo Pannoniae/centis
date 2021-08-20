@@ -45,11 +45,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/androidparty" />
+        app:srcCompat="@drawable/woodensurface" />
 
     <view
         android:id="@+id/view5"
-        class="com.example.happybirthday.RulerView"
+        class="com.pristech.centis.RulerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
