@@ -21,47 +21,17 @@ class RulerView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         val y2 = height.toFloat()  - yMargin
         //val yMid = height / 2.toFloat()
 
-        val lineThickness = 0.5F * cmToPixels()
-        val thickness1 = 0.1F * cmToPixels()
-        val thickness2 = 0.05F * cmToPixels()
-        // at least 1 pixel tho
-        val thickness3 = max(0.025F * cmToPixels(), 1F)
-
-        //val fontSize = 0.5F * cmToPixels()
-
         val smallLineHeight = 1F * cmToPixels()
         val midLineHeight = 1.25F * cmToPixels()
         val largeLineHeight = 1.5F * cmToPixels()
 
-        val line = Paint().apply {
-            color = Color.BLACK
-            strokeWidth = lineThickness
-            strokeCap = Paint.Cap.ROUND
-        }
-
-        val largeLine = Paint().apply {
-            color = Color.BLACK
-            strokeWidth = thickness1
-        }
-        val midLine = Paint().apply {
-            color = Color.BLACK
-            strokeWidth = thickness2
-        }
-        val smallLine = Paint().apply {
-            color = Color.BLACK
-            strokeWidth = thickness3
-        }
-
-        val numbers = Paint().apply {
-            textSize = 0.5F * cmToPixels()
-        }
         // bottom line
-        canvas.drawLine(x1, y2, x2, y2, line)
+        canvas.drawLine(x1, y2, x2, y2, Lines.LINE.line)
         // numbers
         for (i in 0..getMaxDeviceSizeInCm()) {
             canvas.drawTextCentred(
                 i.toString(), (i * cmToPixels()).toFloat() + x1,
-                y2 - largeLineHeight - yMargin, numbers
+                y2 - largeLineHeight - yMargin, Lines.NUMBERS.line
             )
         }
         // the lines
@@ -72,13 +42,13 @@ class RulerView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
             var line: Paint;
             if (i % 10 == 0) {
                 theLineHeight = largeLineHeight
-                line = largeLine
+                line = Lines.LARGE.line
             } else if (i % 5 == 0) {
                 theLineHeight = midLineHeight
-                line = midLine
+                line = Lines.MEDIUM.line
             } else {
                 theLineHeight = smallLineHeight
-                line = smallLine
+                line = Lines.SMALL.line
             }
 
             canvas.drawLine(
