@@ -5,14 +5,14 @@ import android.graphics.Paint
 import android.graphics.Rect
 
 fun cmToPixels(): Int {
-    return 50
+    return 40
 }
 fun mmToPixels(): Int {
     return cmToPixels() / 10
 }
 
 fun getMaxDeviceSizeInCm(): Int {
-    return 50 * 15;
+    return 30 * 10;
 }
 
 private val textBounds: Rect = Rect() //don't new this up in a draw method
