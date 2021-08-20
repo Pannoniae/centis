@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import kotlin.math.max
 
 class RulerView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
     override fun onDraw(canvas: Canvas) {
@@ -23,7 +24,8 @@ class RulerView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         val lineThickness = 0.5F * cmToPixels()
         val thickness1 = 0.1F * cmToPixels()
         val thickness2 = 0.05F * cmToPixels()
-        val thickness3 = 0.01F * cmToPixels()
+        // at least 1 pixel tho
+        val thickness3 = max(0.025F * cmToPixels(), 1F)
 
         //val fontSize = 0.5F * cmToPixels()
 
