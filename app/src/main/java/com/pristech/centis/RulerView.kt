@@ -16,10 +16,8 @@ class RulerView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
         val x1 = 0.toFloat() + xMargin
         val x2 = width.toFloat() - yMargin
-        //val xMid = width / 2.toFloat()
-        //val y1 = 0.toFloat() + yMargin
+        val y1 = 0.toFloat() + yMargin
         val y2 = height.toFloat()  - yMargin
-        //val yMid = height / 2.toFloat()
 
         val smallLineHeight = 1F * cmToPixels()
         val midLineHeight = 1.25F * cmToPixels()

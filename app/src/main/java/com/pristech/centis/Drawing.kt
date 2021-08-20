@@ -24,10 +24,10 @@ enum class Lines(paint: Paint) {
     }),
     MEDIUM(Paint().apply {
         color = Color.BLACK
-        strokeWidth = thickness1
+        strokeWidth = thickness2
     }), LARGE(Paint().apply {
         color = Color.BLACK
-        strokeWidth = thickness2
+        strokeWidth = thickness1
     }), NUMBERS(Paint().apply {
         textSize = fontSize;
     });
