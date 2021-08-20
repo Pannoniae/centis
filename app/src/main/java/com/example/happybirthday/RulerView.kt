@@ -53,7 +53,7 @@ class RulerView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         }
 
         val numbers = Paint().apply {
-            textSize = (0.5 * cmToPixels()).toFloat()
+            textSize = 0.5F * cmToPixels()
         }
         // bottom line
         canvas.drawLine(x1, y2, x2, y2, line)
