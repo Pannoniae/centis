@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.happybirthday
+package com.pristech.centis
 
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 /**
- * Displays a birthday card.
+ * Displays a measuring ruler
  */
 class MainActivity : AppCompatActivity() {
 
