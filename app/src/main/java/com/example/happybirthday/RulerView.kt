@@ -57,8 +57,8 @@ class RulerView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
         canvas.drawLine(x1, y2, x2, y2, line)
         // numbers
         for (i in 0..getMaxDeviceSizeInCm()) {
-            canvas.drawText(
-                i.toString(), (i * cmToPixels()).toFloat() + (x1 / 2),
+            canvas.drawTextCentred(
+                i.toString(), (i * cmToPixels()).toFloat() + x1,
                 y2 - largeLineHeight - yMargin, numbers
             )
         }
