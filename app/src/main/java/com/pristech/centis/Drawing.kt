@@ -20,7 +20,7 @@ enum class LineType {
     },
     MEDIUM {
         override fun size(deviceInfo: DeviceInfo): Float {
-            return 0.005F * deviceInfo.cmToPixels()
+            return max(0.005F * deviceInfo.cmToPixels(), 1F)
         }
     },
     LARGE {

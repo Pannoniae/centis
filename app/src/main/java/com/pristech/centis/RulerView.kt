@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import kotlin.math.roundToInt
 
 
 class RulerView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
@@ -14,12 +15,10 @@ class RulerView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         val deviceInfo = DeviceInfo(context)
         var lineSelector = LineSelector(LineType.NORMAL, deviceInfo)
 
-        val xMargin = 0.25F * deviceInfo.cmToPixels()
-        val yMargin = 0.25F * deviceInfo.cmToPixels()
-        val x1 = 0.toFloat() + xMargin
-        val x2 = width.toFloat() - yMargin
-        val y1 = 0.toFloat() + yMargin
-        val y2 = height.toFloat() - yMargin
+        val x1 = 0.toFloat() + deviceInfo.xMargin()
+        val x2 = width.toFloat() - deviceInfo.yMargin()
+        val y1 = 0.toFloat() + deviceInfo.yMargin()
+        val y2 = height.toFloat() - deviceInfo.yMargin()
 
         val smallLineHeight = 1F * deviceInfo.cmToPixels()
         val midLineHeight = 1.25F * deviceInfo.cmToPixels()
@@ -33,15 +32,21 @@ class RulerView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         canvas.drawLine(x1, y2, x2, y2, line)
         // numbers
         line = lineSelector.choose(LineType.NUMBERS)
-        for (i in 0..deviceInfo.maxDeviceSizeInCm().toInt()) {
+
+        var maxSizeInCm: Int = deviceInfo.maxDeviceSizeInCm().toInt() - 1;
+        // round down
+        if ((maxSizeInCm % 2) != 0) {
+            maxSizeInCm -= 1;
+        }
+        for (i in 0..maxSizeInCm) {
             canvas.drawTextCentred(
                 i.toString(), (i * deviceInfo.cmToPixels()) + x1,
-                y2 - largeLineHeight - yMargin, line
+                y2 - largeLineHeight - deviceInfo.yMargin(), line
             )
         }
 
         // the lines
-        for (i in (0..deviceInfo.maxDeviceSizeInCm().toInt() * 10)) {
+        for (i in (0..maxSizeInCm * 10)) {
 
             if (i % 10 == 0) {
                 theLineHeight = largeLineHeight

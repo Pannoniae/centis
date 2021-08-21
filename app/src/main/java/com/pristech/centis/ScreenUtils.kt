@@ -9,10 +9,22 @@ import android.util.DisplayMetrics
 
 class DeviceInfo(context: Context) {
 
+    fun xMargin(): Float {
+        return 0.25F * cmToPixels()
+    }
+
+    fun yMargin(): Float {
+        return 0.25F * cmToPixels()
+    }
+
     private val metrics: DisplayMetrics = context.resources.displayMetrics
 
     fun cmToPixels(): Float {
         return metrics.ydpi / 2.54F
+    }
+
+    fun pixelsToCm(): Float {
+        return 1 / cmToPixels()
     }
 
     fun mmToPixels(): Float {
@@ -20,11 +32,9 @@ class DeviceInfo(context: Context) {
     }
 
     fun maxDeviceSizeInCm(): Float {
-        return metrics.heightPixels / cmToPixels()
+        return metrics.heightPixels / pixelsToCm() - (xMargin() * 2)
     }
-
 }
-
 
 
 private val textBounds: Rect = Rect() //don't new this up in a draw method
