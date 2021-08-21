@@ -9,23 +9,23 @@ enum class LineType {
 
     NORMAL {
         override fun size(deviceInfo: DeviceInfo): Float {
-            return 0.5F * deviceInfo.cmToPixels()
+            return 0.05F * deviceInfo.cmToPixels()
         }
 
     },
     SMALL {
         override fun size(deviceInfo: DeviceInfo): Float {
-            return max(0.025F * deviceInfo.cmToPixels(), 1F)
+            return max(0.0025F * deviceInfo.cmToPixels(), 1F)
         }
     },
     MEDIUM {
         override fun size(deviceInfo: DeviceInfo): Float {
-            return 0.05F * deviceInfo.cmToPixels()
+            return 0.005F * deviceInfo.cmToPixels()
         }
     },
     LARGE {
         override fun size(deviceInfo: DeviceInfo): Float {
-            return 0.1F * deviceInfo.cmToPixels()
+            return 0.01F * deviceInfo.cmToPixels()
 
         }
     },
@@ -42,27 +42,27 @@ data class LineSelector(
     var lineType: LineType,
     val deviceInfo: DeviceInfo
 ) {
-    var line = when (lineType) {
+    fun choose(lineType: LineType) = when (lineType) {
         LineType.NORMAL -> Paint().apply {
             color = Color.BLACK
-            strokeWidth = lineType.size(deviceInfo)
+            strokeWidth = LineType.NORMAL.size(deviceInfo)
             strokeCap = Paint.Cap.ROUND
         }
         LineType.SMALL -> Paint().apply {
             color = Color.BLACK
-            strokeWidth = lineType.size(deviceInfo)
+            strokeWidth = LineType.SMALL.size(deviceInfo)
         }
         LineType.MEDIUM -> Paint().apply {
             color = Color.BLACK
-            strokeWidth = lineType.size(deviceInfo)
+            strokeWidth = LineType.MEDIUM.size(deviceInfo)
         }
         LineType.LARGE -> Paint().apply {
             color = Color.BLACK
-            strokeWidth = lineType.size(deviceInfo)
+            strokeWidth = LineType.LARGE.size(deviceInfo)
         }
         LineType.NUMBERS -> Paint().apply {
-            color = Color.RED
-            textSize = lineType.size(deviceInfo)
+            color = Color.BLACK
+            textSize = LineType.NUMBERS.size(deviceInfo)
         }
 
 

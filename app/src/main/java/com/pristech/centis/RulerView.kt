@@ -15,7 +15,6 @@ class RulerView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         var lineSelector = LineSelector(LineType.NORMAL, deviceInfo)
 
         val xMargin = 0.25F * deviceInfo.cmToPixels()
-
         val yMargin = 0.25F * deviceInfo.cmToPixels()
         val x1 = 0.toFloat() + xMargin
         val x2 = width.toFloat() - yMargin
@@ -29,14 +28,11 @@ class RulerView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         var theLineHeight: Float
         var line: Paint
 
-        line = lineSelector.line
-
+        line = lineSelector.choose(LineType.NORMAL)
         // bottom line
-        canvas.drawLine(x1, y2, x2, y2, lineSelector.line)
+        canvas.drawLine(x1, y2, x2, y2, line)
         // numbers
-        lineSelector.lineType = LineType.NUMBERS
-        line = lineSelector.line
-
+        line = lineSelector.choose(LineType.NUMBERS)
         for (i in 0..deviceInfo.maxDeviceSizeInCm().toInt()) {
             canvas.drawTextCentred(
                 i.toString(), (i * deviceInfo.cmToPixels()) + x1,
@@ -49,16 +45,13 @@ class RulerView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
             if (i % 10 == 0) {
                 theLineHeight = largeLineHeight
-                lineSelector.lineType = LineType.NORMAL
-                line = lineSelector.line
+                line = lineSelector.choose(LineType.NORMAL)
             } else if (i % 5 == 0) {
                 theLineHeight = midLineHeight
-                lineSelector.lineType = LineType.MEDIUM
-                line = lineSelector.line
+                line = lineSelector.choose(LineType.MEDIUM)
             } else {
                 theLineHeight = smallLineHeight
-                lineSelector.lineType = LineType.SMALL
-                line = lineSelector.line
+                line = lineSelector.choose(LineType.SMALL)
             }
 
             canvas.drawLine(

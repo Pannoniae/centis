@@ -12,7 +12,7 @@ class DeviceInfo(context: Context) {
     private val metrics: DisplayMetrics = context.resources.displayMetrics
 
     fun cmToPixels(): Float {
-        return 30F // metrics.ydpi / 2.54F
+        return metrics.ydpi / 2.54F
     }
 
     fun mmToPixels(): Float {
@@ -20,7 +20,7 @@ class DeviceInfo(context: Context) {
     }
 
     fun maxDeviceSizeInCm(): Float {
-        return 300F // metrics.heightPixels / cmToPixels();
+        return metrics.heightPixels / cmToPixels()
     }
 
 }
