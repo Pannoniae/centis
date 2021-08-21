@@ -4,34 +4,67 @@ import android.graphics.Color
 import android.graphics.Paint
 import kotlin.math.max
 
-val lineThickness = 0.5F * cmToPixels()
-val thickness1 = 0.1F * cmToPixels()
-val thickness2 = 0.05F * cmToPixels()
-// at least 1 pixel tho
-val thickness3 = max(0.025F * cmToPixels(), 1F)
 
-val fontSize = 0.5F * cmToPixels()
+enum class LineType {
 
-enum class Lines(paint: Paint) {
-    LINE(Paint().apply {
-        color = Color.BLACK
-        strokeWidth = lineThickness
-        strokeCap = Paint.Cap.ROUND
-    }),
-    SMALL(Paint().apply {
-        color = Color.BLACK
-        strokeWidth = thickness3
-    }),
-    MEDIUM(Paint().apply {
-        color = Color.BLACK
-        strokeWidth = thickness2
-    }), LARGE(Paint().apply {
-        color = Color.BLACK
-        strokeWidth = thickness1
-    }), NUMBERS(Paint().apply {
-        textSize = fontSize;
-    });
+    NORMAL {
+        override fun size(deviceInfo: DeviceInfo): Float {
+            return 0.5F * deviceInfo.cmToPixels()
+        }
 
-    val line = paint
+    },
+    SMALL {
+        override fun size(deviceInfo: DeviceInfo): Float {
+            return max(0.025F * deviceInfo.cmToPixels(), 1F)
+        }
+    },
+    MEDIUM {
+        override fun size(deviceInfo: DeviceInfo): Float {
+            return 0.05F * deviceInfo.cmToPixels()
+        }
+    },
+    LARGE {
+        override fun size(deviceInfo: DeviceInfo): Float {
+            return 0.1F * deviceInfo.cmToPixels()
 
+        }
+    },
+    NUMBERS {
+        override fun size(deviceInfo: DeviceInfo): Float {
+            return 0.5F * deviceInfo.cmToPixels()
+        }
+    };
+
+    abstract fun size(deviceInfo: DeviceInfo): Float
+}
+
+data class LineSelector(
+    var lineType: LineType,
+    val deviceInfo: DeviceInfo
+) {
+    var line = when (lineType) {
+        LineType.NORMAL -> Paint().apply {
+            color = Color.BLACK
+            strokeWidth = lineType.size(deviceInfo)
+            strokeCap = Paint.Cap.ROUND
+        }
+        LineType.SMALL -> Paint().apply {
+            color = Color.BLACK
+            strokeWidth = lineType.size(deviceInfo)
+        }
+        LineType.MEDIUM -> Paint().apply {
+            color = Color.BLACK
+            strokeWidth = lineType.size(deviceInfo)
+        }
+        LineType.LARGE -> Paint().apply {
+            color = Color.BLACK
+            strokeWidth = lineType.size(deviceInfo)
+        }
+        LineType.NUMBERS -> Paint().apply {
+            color = Color.RED
+            textSize = lineType.size(deviceInfo)
+        }
+
+
+    }
 }

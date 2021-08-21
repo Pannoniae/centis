@@ -1,19 +1,31 @@
 package com.pristech.centis
 
+import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
+import android.util.DisplayMetrics
 
-fun cmToPixels(): Int {
-    return 40
-}
-fun mmToPixels(): Int {
-    return cmToPixels() / 10
+
+class DeviceInfo(context: Context) {
+
+    private val metrics: DisplayMetrics = context.resources.displayMetrics
+
+    fun cmToPixels(): Float {
+        return 30F // metrics.ydpi / 2.54F
+    }
+
+    fun mmToPixels(): Float {
+        return cmToPixels() / 10.0F
+    }
+
+    fun maxDeviceSizeInCm(): Float {
+        return 300F // metrics.heightPixels / cmToPixels();
+    }
+
 }
 
-fun getMaxDeviceSizeInCm(): Int {
-    return 30 * 10;
-}
+
 
 private val textBounds: Rect = Rect() //don't new this up in a draw method
 
